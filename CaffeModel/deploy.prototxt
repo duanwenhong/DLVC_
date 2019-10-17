@@ -1,0 +1,1092 @@
+name: "VRCNN"
+input: "data"
+input_dim: 1
+input_dim: 1
+input_dim: 140
+input_dim: 140
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult:0.1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+	type:"msra"
+	}
+	bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer{
+name:"conv2"
+type:"Convolution"
+bottom:"conv1"
+top:"conv2"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu1"
+type:"ReLU"
+bottom:"conv2"
+top:"conv2"
+}
+layer{
+name:"conv3"
+type:"Convolution"
+bottom:"conv2"
+top:"conv3"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi1"
+type:"Eltwise"
+bottom:"conv3"
+bottom:"conv1"
+top:"resi1"
+}
+layer{
+name:"conv4"
+type:"Convolution"
+bottom:"resi1"
+top:"conv4"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu2"
+type:"ReLU"
+bottom:"conv4"
+top:"conv4"
+}
+layer{
+name:"conv5"
+type:"Convolution"
+bottom:"conv4"
+top:"conv5"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi2"
+type:"Eltwise"
+bottom:"conv5"
+bottom:"resi1"
+top:"resi2"
+}
+layer{
+name:"conv6"
+type:"Convolution"
+bottom:"resi2"
+top:"conv6"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu3"
+type:"ReLU"
+bottom:"conv6"
+top:"conv6"
+}
+layer{
+name:"conv7"
+type:"Convolution"
+bottom:"conv6"
+top:"conv7"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi3"
+type:"Eltwise"
+bottom:"conv7"
+bottom:"resi2"
+top:"resi3"
+}
+layer{
+name:"conv8"
+type:"Convolution"
+bottom:"resi3"
+top:"conv8"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu4"
+type:"ReLU"
+bottom:"conv8"
+top:"conv8"
+}
+layer{
+name:"conv9"
+type:"Convolution"
+bottom:"conv8"
+top:"conv9"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi4"
+type:"Eltwise"
+bottom:"conv9"
+bottom:"resi3"
+top:"resi4"
+}
+layer{
+name:"conv10"
+type:"Convolution"
+bottom:"resi4"
+top:"conv10"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu5"
+type:"ReLU"
+bottom:"conv10"
+top:"conv10"
+}
+layer{
+name:"conv11"
+type:"Convolution"
+bottom:"conv10"
+top:"conv11"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi5"
+type:"Eltwise"
+bottom:"conv11"
+bottom:"resi4"
+top:"resi5"
+}
+layer{
+name:"conv12"
+type:"Convolution"
+bottom:"resi5"
+top:"conv12"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu6"
+type:"ReLU"
+bottom:"conv12"
+top:"conv12"
+}
+layer{
+name:"conv13"
+type:"Convolution"
+bottom:"conv12"
+top:"conv13"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi6"
+type:"Eltwise"
+bottom:"conv13"
+bottom:"resi5"
+top:"resi6"
+}
+layer{
+name:"conv14"
+type:"Convolution"
+bottom:"resi6"
+top:"conv14"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu7"
+type:"ReLU"
+bottom:"conv14"
+top:"conv14"
+}
+layer{
+name:"conv15"
+type:"Convolution"
+bottom:"conv14"
+top:"conv15"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi7"
+type:"Eltwise"
+bottom:"conv15"
+bottom:"resi6"
+top:"resi7"
+}
+layer{
+name:"conv16"
+type:"Convolution"
+bottom:"resi7"
+top:"conv16"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu8"
+type:"ReLU"
+bottom:"conv16"
+top:"conv16"
+}
+layer{
+name:"conv17"
+type:"Convolution"
+bottom:"conv16"
+top:"conv17"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi8"
+type:"Eltwise"
+bottom:"conv17"
+bottom:"resi7"
+top:"resi8"
+}
+layer{
+name:"conv18"
+type:"Convolution"
+bottom:"resi8"
+top:"conv18"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu9"
+type:"ReLU"
+bottom:"conv18"
+top:"conv18"
+}
+layer{
+name:"conv19"
+type:"Convolution"
+bottom:"conv18"
+top:"conv19"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi9"
+type:"Eltwise"
+bottom:"conv19"
+bottom:"resi8"
+top:"resi9"
+}
+layer{
+name:"conv20"
+type:"Convolution"
+bottom:"resi9"
+top:"conv20"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu10"
+type:"ReLU"
+bottom:"conv20"
+top:"conv20"
+}
+layer{
+name:"conv21"
+type:"Convolution"
+bottom:"conv20"
+top:"conv21"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi10"
+type:"Eltwise"
+bottom:"conv21"
+bottom:"resi9"
+top:"resi10"
+}
+layer{
+name:"conv22"
+type:"Convolution"
+bottom:"resi10"
+top:"conv22"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu11"
+type:"ReLU"
+bottom:"conv22"
+top:"conv22"
+}
+layer{
+name:"conv23"
+type:"Convolution"
+bottom:"conv22"
+top:"conv23"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi11"
+type:"Eltwise"
+bottom:"conv23"
+bottom:"resi10"
+top:"resi11"
+}
+layer{
+name:"conv24"
+type:"Convolution"
+bottom:"resi11"
+top:"conv24"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu12"
+type:"ReLU"
+bottom:"conv24"
+top:"conv24"
+}
+layer{
+name:"conv25"
+type:"Convolution"
+bottom:"conv24"
+top:"conv25"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi12"
+type:"Eltwise"
+bottom:"conv25"
+bottom:"resi11"
+top:"resi12"
+}
+layer{
+name:"conv26"
+type:"Convolution"
+bottom:"resi12"
+top:"conv26"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu13"
+type:"ReLU"
+bottom:"conv26"
+top:"conv26"
+}
+layer{
+name:"conv27"
+type:"Convolution"
+bottom:"conv26"
+top:"conv27"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi13"
+type:"Eltwise"
+bottom:"conv27"
+bottom:"resi12"
+top:"resi13"
+}
+layer{
+name:"conv28"
+type:"Convolution"
+bottom:"resi13"
+top:"conv28"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu14"
+type:"ReLU"
+bottom:"conv28"
+top:"conv28"
+}
+layer{
+name:"conv29"
+type:"Convolution"
+bottom:"conv28"
+top:"conv29"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi14"
+type:"Eltwise"
+bottom:"conv29"
+bottom:"resi13"
+top:"resi14"
+}
+layer{
+name:"conv30"
+type:"Convolution"
+bottom:"resi14"
+top:"conv30"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu15"
+type:"ReLU"
+bottom:"conv30"
+top:"conv30"
+}
+layer{
+name:"conv31"
+type:"Convolution"
+bottom:"conv30"
+top:"conv31"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi15"
+type:"Eltwise"
+bottom:"conv31"
+bottom:"resi14"
+top:"resi15"
+}
+layer{
+name:"conv32"
+type:"Convolution"
+bottom:"resi15"
+top:"conv32"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer{
+name:"relu16"
+type:"ReLU"
+bottom:"conv32"
+top:"conv32"
+}
+layer{
+name:"conv33"
+type:"Convolution"
+bottom:"conv32"
+top:"conv33"
+param{
+lr_mult:1
+}
+param{
+lr_mult:0.1
+}
+convolution_param{
+num_output:64
+kernel_size:3
+stride:1
+pad:1
+weight_filler{
+type:"msra"
+}
+bias_filler{
+type: "constant"
+value: 0
+}
+}
+}
+layer
+{
+name:"resi16"
+type:"Eltwise"
+bottom:"conv33"
+bottom:"resi15"
+top:"resi16"
+}
+layer {
+  name: "conv34"
+  type: "Convolution"
+  bottom: "resi16"
+  top: "conv34"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult:0.1
+  }
+  convolution_param {
+    num_output: 1
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+	type:"msra"
+	}
+	bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer
+{
+name:"res"
+type:"Eltwise"
+bottom:"data"
+bottom:"conv34"
+top:"res"
+eltwise_param {
+    operation: SUM
+  }
+}
